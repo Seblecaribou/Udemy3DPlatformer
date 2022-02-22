@@ -23,6 +23,10 @@ public class PlayerController : MonoBehaviour
     public Animator playerAnimator;
     #endregion
 
+    #region Awake
+    private void Awake() { }
+    #endregion
+
     #region Start and Update
     void Start()
     {
