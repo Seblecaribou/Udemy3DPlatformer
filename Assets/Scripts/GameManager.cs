@@ -7,6 +7,8 @@ public class GameManager : MonoBehaviour
     #region Variables
     public static GameManager instance;
 
+    private Vector3 respawnPosition;
+
     //Cursor
     public bool cursorVisible = false;
     public CursorLockMode cursorLockMode = CursorLockMode.Locked;
@@ -23,6 +25,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         cursorHandler();
+        respawnPosition = PlayerController.instance.transform.position;
     }
 
     void Update()
@@ -40,7 +43,17 @@ public class GameManager : MonoBehaviour
 
     public void Respawn()
     {
-        Debug.Log("Respawned");
+        StartCoroutine(respawnCoroutine());
+    }
+
+    public IEnumerator respawnCoroutine()
+    {
+        PlayerController.instance.gameObject.SetActive(false);
+
+        yield return new WaitForSeconds(2f);
+
+        PlayerController.instance.gameObject.transform.position = respawnPosition;
+        PlayerController.instance.gameObject.SetActive(true);
     }
     #endregion
 }

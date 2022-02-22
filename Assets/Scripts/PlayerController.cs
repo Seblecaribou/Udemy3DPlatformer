@@ -5,6 +5,8 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     #region Variables
+    public static PlayerController instance;
+
     //Movement related vairable
     public float moveSpeed = 5f;
     public float jumpForce = 10f;
@@ -24,7 +26,10 @@ public class PlayerController : MonoBehaviour
     #endregion
 
     #region Awake
-    private void Awake() { }
+    private void Awake()
+    {
+        instance = this;
+    }
     #endregion
 
     #region Start and Update
