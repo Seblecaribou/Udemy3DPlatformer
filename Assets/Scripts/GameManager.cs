@@ -24,7 +24,7 @@ public class GameManager : MonoBehaviour
     #region Start and Update
     void Start()
     {
-        cursorHandler();
+        CursorHandler();
         respawnPosition = PlayerController.instance.transform.position;
     }
 
@@ -35,7 +35,7 @@ public class GameManager : MonoBehaviour
     #endregion
 
     #region Methods
-    private void cursorHandler()
+    private void CursorHandler()
     {
         Cursor.visible = cursorVisible;
         Cursor.lockState = cursorLockMode;
@@ -43,17 +43,21 @@ public class GameManager : MonoBehaviour
 
     public void Respawn()
     {
-        StartCoroutine(respawnCoroutine());
+        StartCoroutine(RespawnCoroutine());
     }
 
-    public IEnumerator respawnCoroutine()
+    public IEnumerator RespawnCoroutine()
     {
         //De-activate player and camera
         PlayerController.instance.gameObject.SetActive(false);
         CameraController.instance.cinemachineBrain.enabled = false;
+        UIManager.instance.fadeToBlack = true;
+
         //Set timeout
         yield return new WaitForSeconds(2f);
+
         //Respawn and activate player and camera back in place
+        UIManager.instance.fadeFromBlack = true;
         PlayerController.instance.gameObject.transform.position = respawnPosition;
         PlayerController.instance.gameObject.SetActive(true);
         CameraController.instance.cinemachineBrain.enabled = true;

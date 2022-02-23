@@ -40,16 +40,16 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        checkPlayerRun();
-        checkPlayerJump();
-        playerMovementHandler();
-        checkCameraMovement();
-        checkPlayerAnimation();
+        CheckPlayerRun();
+        CheckPlayerJump();
+        PlayerMovementHandler();
+        CheckCameraMovement();
+        CheckPlayerAnimation();
     }
     #endregion
 
     #region Methods
-    void checkPlayerRun()
+    void CheckPlayerRun()
         {
             float yStored = moveDirection.y;
             moveDirection = transform.forward * Input.GetAxisRaw("Vertical") + transform.right * Input.GetAxisRaw("Horizontal");
@@ -59,7 +59,7 @@ public class PlayerController : MonoBehaviour
             moveDirection.y = yStored;
         }
 
-    void checkPlayerJump()
+    void CheckPlayerJump()
         {
             if (charControl.isGrounded)
             {
@@ -68,7 +68,7 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-    void checkCameraMovement()
+    void CheckCameraMovement()
         {
             if (Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0)
             {
@@ -83,13 +83,13 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-    void checkPlayerAnimation()
+    void CheckPlayerAnimation()
         {
             playerAnimator.SetFloat("Speed", Mathf.Abs(moveDirection.x) + Mathf.Abs(moveDirection.z));
             playerAnimator.SetBool("Grounded", charControl.isGrounded);
         }
 
-    void playerMovementHandler()
+    void PlayerMovementHandler()
         {
             moveDirection.y += Physics.gravity.y * Time.deltaTime * gravityScale;
             charControl.Move(moveDirection * Time.deltaTime);
