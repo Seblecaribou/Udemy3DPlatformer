@@ -527,47 +527,42 @@ PrefabInstance:
     - target: {fileID: 184935755749349585, guid: 2f6af0e7e91e820489a236a202a61c38,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.000000015097113
+      value: 0.000000015097077
       objectReference: {fileID: 0}
     - target: {fileID: 184935755749349585, guid: 2f6af0e7e91e820489a236a202a61c38,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -6.573563e-10
+      value: -6.573554e-10
       objectReference: {fileID: 0}
     - target: {fileID: 184935756267818764, guid: 2f6af0e7e91e820489a236a202a61c38,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.0000000014443532
+      value: -0.0000000014443781
       objectReference: {fileID: 0}
     - target: {fileID: 184935756267818764, guid: 2f6af0e7e91e820489a236a202a61c38,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.000000009211266
-      objectReference: {fileID: 0}
-    - target: {fileID: 184935756435988503, guid: 2f6af0e7e91e820489a236a202a61c38,
-        type: 3}
-      propertyPath: m_TagString
-      value: Player
+      value: 0.000000009211262
       objectReference: {fileID: 0}
     - target: {fileID: 184935757041650907, guid: 2f6af0e7e91e820489a236a202a61c38,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.000000013048316
+      value: 0.000000013048261
       objectReference: {fileID: 0}
     - target: {fileID: 184935757041650907, guid: 2f6af0e7e91e820489a236a202a61c38,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.000000012802378
+      value: 0.0000000128023645
       objectReference: {fileID: 0}
     - target: {fileID: 184935757147222518, guid: 2f6af0e7e91e820489a236a202a61c38,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.0000000035247734
+      value: -0.00000000101514
       objectReference: {fileID: 0}
     - target: {fileID: 184935757147222518, guid: 2f6af0e7e91e820489a236a202a61c38,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.000000008687742
+      value: 0.000000009355789
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f6af0e7e91e820489a236a202a61c38, type: 3}

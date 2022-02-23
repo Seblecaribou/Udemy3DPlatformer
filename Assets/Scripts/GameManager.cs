@@ -48,12 +48,15 @@ public class GameManager : MonoBehaviour
 
     public IEnumerator respawnCoroutine()
     {
+        //De-activate player and camera
         PlayerController.instance.gameObject.SetActive(false);
-
+        CameraController.instance.cinemachineBrain.enabled = false;
+        //Set timeout
         yield return new WaitForSeconds(2f);
-
+        //Respawn and activate player and camera back in place
         PlayerController.instance.gameObject.transform.position = respawnPosition;
         PlayerController.instance.gameObject.SetActive(true);
+        CameraController.instance.cinemachineBrain.enabled = true;
     }
     #endregion
 }
