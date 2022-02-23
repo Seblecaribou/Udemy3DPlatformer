@@ -41,6 +41,11 @@ public class GameManager : MonoBehaviour
         Cursor.lockState = cursorLockMode;
     }
 
+    public void SetSpawnPoint(Vector3 newSpawnPoint)
+    {
+        respawnPosition = newSpawnPoint;
+    }
+
     public void Respawn()
     {
         StartCoroutine(RespawnCoroutine());

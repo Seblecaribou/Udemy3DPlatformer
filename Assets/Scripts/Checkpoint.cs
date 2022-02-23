@@ -25,5 +25,12 @@ public class Checkpoint : MonoBehaviour
     #endregion
 
     #region Methods
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Player")
+        {
+            GameManager.instance.SetSpawnPoint(transform.position);
+        }
+    }
     #endregion
 }
