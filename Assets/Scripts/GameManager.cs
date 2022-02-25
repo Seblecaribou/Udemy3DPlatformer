@@ -62,6 +62,7 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(2f);
 
         //Respawn and activate player and camera back in place
+        HealthManager.instance.SetHealthToMax();
         UIManager.instance.fadeFromBlack = true;
         PlayerController.instance.gameObject.transform.position = respawnPosition;
         PlayerController.instance.gameObject.SetActive(true);

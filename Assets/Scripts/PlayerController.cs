@@ -7,6 +7,9 @@ public class PlayerController : MonoBehaviour
     #region Variables
     public static PlayerController instance;
 
+    //Health
+    public int maxHealth = 3;
+
     //Movement related vairable
     public float moveSpeed = 5f;
     public float jumpForce = 10f;
