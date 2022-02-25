@@ -26,6 +26,13 @@ public class PlayerController : MonoBehaviour
     //Animation
     public GameObject playerModel;
     public Animator playerAnimator;
+
+    //Post damage
+    public bool isKnockedBack = false;
+    public float knockbackLength = 0.5f;
+    private float knockbackCounter;
+    public Vector2 knockbackPower;
+
     #endregion
 
     #region Awake
@@ -43,59 +50,84 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        CheckPlayerRun();
-        CheckPlayerJump();
-        PlayerMovementHandler();
-        CheckCameraMovement();
+        if (!isKnockedBack)
+        {
+            CheckPlayerRun();
+            CheckPlayerJump();
+            PlayerMovementHandler();
+            CheckCameraMovement();
+        } else
+        {
+            KnockbackPlayer();
+            PlayerMovementHandler();
+        }
         CheckPlayerAnimation();
     }
     #endregion
 
     #region Methods
-    void CheckPlayerRun()
+    private void CheckPlayerRun()
+    {
+        float yStored = moveDirection.y;
+        moveDirection = transform.forward * Input.GetAxisRaw("Vertical") + transform.right * Input.GetAxisRaw("Horizontal");
+        //solves the speed*2 problem when pressing diagonals
+        moveDirection.Normalize();
+        moveDirection *= moveSpeed;
+        moveDirection.y = yStored;
+    }
+
+    private void CheckPlayerJump()
+    {
+        if (charControl.isGrounded)
         {
-            float yStored = moveDirection.y;
-            moveDirection = transform.forward * Input.GetAxisRaw("Vertical") + transform.right * Input.GetAxisRaw("Horizontal");
-            //solves the speed*2 problem when pressing diagonals
-            moveDirection.Normalize();
-            moveDirection *= moveSpeed;
-            moveDirection.y = yStored;
+            moveDirection.y = 0;
+            if (Input.GetButtonDown("Jump")) moveDirection.y = jumpForce;
         }
+    }
 
-    void CheckPlayerJump()
+    private void CheckCameraMovement()
+    {
+        if (Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0)
         {
-            if (charControl.isGrounded)
-            {
-                moveDirection.y = 0;
-                if (Input.GetButtonDown("Jump")) moveDirection.y = jumpForce;
-            }
+            //Third person shooter camera
+            //transform.rotation = Quaternion.Euler(0f, playerCamera.transform.eulerAngles.y, 0f);
+
+            //Platformer camera
+            transform.rotation = Quaternion.Euler(0f, playerCamera.transform.eulerAngles.y, 0f);
+            Quaternion newRotation = Quaternion.LookRotation(new Vector3(moveDirection.x, 0f, moveDirection.z));
+
+            playerModel.transform.rotation = Quaternion.Slerp(playerModel.transform.rotation, newRotation, rotateSpeed * Time.deltaTime);
         }
+    }
 
-    void CheckCameraMovement()
-        {
-            if (Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0)
-            {
-                //Third person shooter camera
-                //transform.rotation = Quaternion.Euler(0f, playerCamera.transform.eulerAngles.y, 0f);
+    private void CheckPlayerAnimation()
+    {
+        playerAnimator.SetFloat("Speed", Mathf.Abs(moveDirection.x) + Mathf.Abs(moveDirection.z));
+        playerAnimator.SetBool("Grounded", charControl.isGrounded);
+    }
 
-                //Platformer camera
-                transform.rotation = Quaternion.Euler(0f, playerCamera.transform.eulerAngles.y, 0f);
-                Quaternion newRotation = Quaternion.LookRotation(new Vector3(moveDirection.x, 0f, moveDirection.z));
+    private void PlayerMovementHandler()
+    {
+        moveDirection.y += Physics.gravity.y * Time.deltaTime * gravityScale;
+        charControl.Move(moveDirection * Time.deltaTime);
+    }
+    
+    private void KnockbackPlayer()
+    {
+        knockbackCounter -= Time.deltaTime;
 
-                playerModel.transform.rotation = Quaternion.Slerp(playerModel.transform.rotation, newRotation, rotateSpeed * Time.deltaTime);
-            }
-        }
+        float yStore = moveDirection.y;
+        moveDirection = playerModel.transform.forward * -knockbackPower.x;
+        moveDirection.y = yStore;
 
-    void CheckPlayerAnimation()
-        {
-            playerAnimator.SetFloat("Speed", Mathf.Abs(moveDirection.x) + Mathf.Abs(moveDirection.z));
-            playerAnimator.SetBool("Grounded", charControl.isGrounded);
-        }
+        if (knockbackCounter <= 0) isKnockedBack = false;
+    }
 
-    void PlayerMovementHandler()
-        {
-            moveDirection.y += Physics.gravity.y * Time.deltaTime * gravityScale;
-            charControl.Move(moveDirection * Time.deltaTime);
-        }
+    public void SetKnockback(bool canKnockBack)
+    {
+        isKnockedBack = canKnockBack;
+        knockbackCounter = knockbackLength;
+        moveDirection.y = knockbackPower.y;
+    }
     #endregion
 }

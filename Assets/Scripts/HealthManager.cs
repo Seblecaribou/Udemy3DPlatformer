@@ -35,12 +35,15 @@ public class HealthManager : MonoBehaviour
         currentHealth = PlayerController.instance.maxHealth;
     }
 
-    public void DealDamage(int damage)
+    public void DealDamage(int damage, bool canKnockback)
     {
         currentHealth -= damage;
-        if (currentHealth <= 0) 
-        { 
+        if (currentHealth <= 0)
+        {
             GameManager.instance.Respawn();
+        } else
+        {
+            PlayerController.instance.SetKnockback(canKnockback);
         }
     }
 

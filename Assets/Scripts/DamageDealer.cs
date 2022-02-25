@@ -6,6 +6,7 @@ public class DamageDealer : MonoBehaviour
 {
     #region Variables
     public int damage = 1;
+    public bool canKnockback = true;
     #endregion
 
     #region Awake
@@ -26,7 +27,7 @@ public class DamageDealer : MonoBehaviour
     #region Methods
     void OnTriggerEnter(Collider other)
     {
-        HealthManager.instance.DealDamage(damage);
+        HealthManager.instance.DealDamage(damage, canKnockback);
     }
     #endregion
 }
