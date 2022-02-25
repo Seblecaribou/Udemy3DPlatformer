@@ -5,6 +5,8 @@ using UnityEngine;
 public class Checkpoint : MonoBehaviour
 {
     #region Variables
+    public GameObject checkpointOn;
+    public GameObject checkpointOff;
     #endregion
 
     #region Awake
@@ -14,7 +16,8 @@ public class Checkpoint : MonoBehaviour
     #region Start and Update
     void Start()
     {
-        
+        checkpointOff.SetActive(true);
+        checkpointOn.SetActive(false);
     }
 
     void Update()
@@ -29,7 +32,20 @@ public class Checkpoint : MonoBehaviour
     {
         if (other.tag == "Player")
         {
+            //Change spawn point
             GameManager.instance.SetSpawnPoint(transform.position);
+
+            //De-activates all checkpoints before activating the triggered one
+            Checkpoint[] allCheckpoints = FindObjectsOfType<Checkpoint>();
+            foreach (Checkpoint checkpoint in allCheckpoints)
+            {
+                checkpoint.checkpointOff.SetActive(true);
+                checkpoint.checkpointOn.SetActive(false);
+            }
+
+            //Activate the triggered checkpoint
+            checkpointOff.SetActive(false);
+            checkpointOn.SetActive(true);
         }
     }
     #endregion
