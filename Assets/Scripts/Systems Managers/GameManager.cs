@@ -9,6 +9,8 @@ public class GameManager : MonoBehaviour
 
     private Vector3 respawnPosition;
 
+    public float respawnDelay = 3f;
+
     //Cursor
     public bool cursorVisible = false;
     public CursorLockMode cursorLockMode = CursorLockMode.Locked;
@@ -57,9 +59,10 @@ public class GameManager : MonoBehaviour
         PlayerController.instance.gameObject.SetActive(false);
         CameraController.instance.cinemachineBrain.enabled = false;
         UIManager.instance.fadeToBlack = true;
+        PlayerController.instance.PlayerExplorion();
 
         //Set timeout
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(respawnDelay);
 
         //Respawn and activate player and camera back in place
         HealthManager.instance.SetHealthToMax();

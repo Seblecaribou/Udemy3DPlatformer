@@ -63,15 +63,9 @@ public class HealthManager : MonoBehaviour
     }
 
     public void Heal(int healthPoints)
-    {
-        int sum = currentHealth + healthPoints;
-        if (sum <= PlayerController.instance.maxHealth)
-        {
-            currentHealth += healthPoints;
-        } else
-        {
-            SetHealthToMax();
-        }
+    { 
+        currentHealth += healthPoints;
+        if (currentHealth > maxHealth) SetHealthToMax();
     }
     #endregion
 }

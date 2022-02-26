@@ -26,6 +26,7 @@ public class PlayerController : MonoBehaviour
     //Animation
     public GameObject playerModel;
     public Animator playerAnimator;
+    public GameObject playerExplosion;
 
     //Post damage
     public bool isKnockedBack = false;
@@ -145,6 +146,12 @@ public class PlayerController : MonoBehaviour
             }
             if (countdown <= 0) playerPiece.SetActive(true);
         }
+    }
+    
+    public void PlayerExplorion()
+    {
+        GameObject explosion = Instantiate(playerExplosion, transform.position + new Vector3(0, 1f, 0), transform.rotation);
+        Destroy(explosion, 2f);
     }
     #endregion
 }

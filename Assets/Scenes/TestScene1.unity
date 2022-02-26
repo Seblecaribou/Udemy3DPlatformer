@@ -321,6 +321,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1114162746}
   - component: {fileID: 1114162747}
+  - component: {fileID: 1114162748}
   m_Layer: 0
   m_Name: HeartPickup
   m_TagString: Untagged
@@ -351,11 +352,24 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1114162745}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.35
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1114162748
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1114162745}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b3241f74cbe13b4baf95231628c9280, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthPoints: 1
 --- !u!1001 &1411166640
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -860,42 +874,48 @@ PrefabInstance:
     - target: {fileID: 184935755749349585, guid: 2f6af0e7e91e820489a236a202a61c38,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.000000016764742
+      value: -0.000000014945485
       objectReference: {fileID: 0}
     - target: {fileID: 184935755749349585, guid: 2f6af0e7e91e820489a236a202a61c38,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 7.301778e-10
+      value: 6.5073374e-10
       objectReference: {fileID: 0}
     - target: {fileID: 184935756267818764, guid: 2f6af0e7e91e820489a236a202a61c38,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.000000030850668
+      value: -0.000000032537326
       objectReference: {fileID: 0}
     - target: {fileID: 184935756267818764, guid: 2f6af0e7e91e820489a236a202a61c38,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.0000000025151177
+      value: 0.00000000213127
       objectReference: {fileID: 0}
+    - target: {fileID: 184935756435988497, guid: 2f6af0e7e91e820489a236a202a61c38,
+        type: 3}
+      propertyPath: playerExplosion
+      value: 
+      objectReference: {fileID: 4975168481234586691, guid: cd64001f62decf94fa99a4254962a1ae,
+        type: 3}
     - target: {fileID: 184935757041650907, guid: 2f6af0e7e91e820489a236a202a61c38,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.00000004717296
+      value: -0.000000047083223
       objectReference: {fileID: 0}
     - target: {fileID: 184935757041650907, guid: 2f6af0e7e91e820489a236a202a61c38,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.0000000020656852
+      value: -0.0000000020434274
       objectReference: {fileID: 0}
     - target: {fileID: 184935757147222518, guid: 2f6af0e7e91e820489a236a202a61c38,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.000000031888145
+      value: -0.000000030843495
       objectReference: {fileID: 0}
     - target: {fileID: 184935757147222518, guid: 2f6af0e7e91e820489a236a202a61c38,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.0000000011355388
+      value: 0.0000000014137238
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f6af0e7e91e820489a236a202a61c38, type: 3}
@@ -906,11 +926,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 340277673757935665, guid: 905c274c3fc8d314393647583c012540,
-        type: 3}
-      propertyPath: m_Color.a
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 340277674031253505, guid: 905c274c3fc8d314393647583c012540,
         type: 3}
       propertyPath: m_Pivot.x
@@ -1023,8 +1038,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 340277674031253534, guid: 905c274c3fc8d314393647583c012540,
         type: 3}
-      propertyPath: fadeFromBlack
-      value: 1
+      propertyPath: fadeSpeed
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 905c274c3fc8d314393647583c012540, type: 3}

@@ -10,7 +10,7 @@ public class UIManager : MonoBehaviour
 
     //Black screen
     public Image blackScreen;
-    public float fadeSpeed = 1f;
+    public float fadeSpeed = 2f;
     public bool fadeToBlack, fadeFromBlack;
     #endregion
 
