@@ -59,7 +59,7 @@ public class GameManager : MonoBehaviour
         PlayerController.instance.gameObject.SetActive(false);
         CameraController.instance.cinemachineBrain.enabled = false;
         UIManager.instance.fadeToBlack = true;
-        PlayerController.instance.PlayerExplorion();
+        PlayerController.instance.PlayerExplosionAnimation();
 
         //Set timeout
         yield return new WaitForSeconds(respawnDelay);

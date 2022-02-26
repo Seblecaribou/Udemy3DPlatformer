@@ -27,6 +27,7 @@ public class PlayerController : MonoBehaviour
     public GameObject playerModel;
     public Animator playerAnimator;
     public GameObject playerExplosion;
+    public GameObject healthParticles;
 
     //Post damage
     public bool isKnockedBack = false;
@@ -148,10 +149,15 @@ public class PlayerController : MonoBehaviour
         }
     }
     
-    public void PlayerExplorion()
+    public void PlayerExplosionAnimation()
     {
         GameObject explosion = Instantiate(playerExplosion, transform.position + new Vector3(0, 1f, 0), transform.rotation);
         Destroy(explosion, 2f);
+    }
+
+    public void PlayerHealingAnimation()
+    {
+        healthParticles.SetActive(true);
     }
     #endregion
 }
