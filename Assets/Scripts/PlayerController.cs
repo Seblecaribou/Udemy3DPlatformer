@@ -26,7 +26,6 @@ public class PlayerController : MonoBehaviour
     //Animation
     public GameObject playerModel;
     public Animator playerAnimator;
-    public float flickeringIntensity = 25f;
 
     //Post damage
     public bool isKnockedBack = false;
@@ -132,11 +131,11 @@ public class PlayerController : MonoBehaviour
         moveDirection.y = knockbackPower.y;
     }
     
-    public void PlayerFlicker(float counter)
+    public void PlayerFlicker(float countdown, float flickeringIntensity)
     {
         foreach (GameObject playerPiece in playerPieces)
         {
-            if (Mathf.Floor(counter * flickeringIntensity) % 2 == 0)
+            if (Mathf.Floor(countdown * flickeringIntensity) % 2 == 0)
             {
                 playerPiece.SetActive(true);
             }
@@ -144,7 +143,7 @@ public class PlayerController : MonoBehaviour
             {
                 playerPiece.SetActive(false);
             }
-            if (counter <= 0) playerPiece.SetActive(true);
+            if (countdown <= 0) playerPiece.SetActive(true);
         }
     }
     #endregion

@@ -13,6 +13,7 @@ public class HealthManager : MonoBehaviour
     //Invicibility handler
     public float invincibilityLength = 2f;
     public float invincibilityCounter;
+    public float flickeringIntensity = 25f;
     #endregion
 
     #region Awake
@@ -43,7 +44,7 @@ public class HealthManager : MonoBehaviour
     public void SetInvincibility()
     {
         if (invincibilityCounter > 0) invincibilityCounter -= Time.deltaTime;
-        PlayerController.instance.PlayerFlicker(invincibilityCounter);
+        PlayerController.instance.PlayerFlicker(invincibilityCounter, flickeringIntensity);
     }
 
     public void DealDamage(int damage, bool canKnockback)
@@ -58,10 +59,6 @@ public class HealthManager : MonoBehaviour
         {
             PlayerController.instance.SetKnockback(canKnockback);
             invincibilityCounter = invincibilityLength;
-            foreach (GameObject playerPiece in PlayerController.instance.playerPieces)
-            {
-                playerPiece.SetActive(false);
-            }
         }
     }
 
