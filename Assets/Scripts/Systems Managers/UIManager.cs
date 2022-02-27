@@ -17,6 +17,8 @@ public class UIManager : MonoBehaviour
 
     //Health UI
     public Text healthText;
+    public Image healthFlowerImage;
+    public Sprite[] healthFlowerSpriteSheet;
     #endregion
 
     #region Awake
@@ -68,7 +70,31 @@ public class UIManager : MonoBehaviour
 
     private void UpdateHealthUI()
     {
+
         healthText.text = HealthManager.instance.currentHealth.ToString();
+        switch (HealthManager.instance.currentHealth.ToString())
+        {
+            case ("5"):
+                healthFlowerImage.sprite = healthFlowerSpriteSheet[4];
+                break;
+            case ("4"):
+                healthFlowerImage.sprite = healthFlowerSpriteSheet[3];
+                break;
+            case ("3"):
+                healthFlowerImage.sprite = healthFlowerSpriteSheet[2];
+
+                break;
+            case ("2"):
+                healthFlowerImage.sprite = healthFlowerSpriteSheet[1];
+
+                break;
+            case ("1"):
+                healthFlowerImage.sprite = healthFlowerSpriteSheet[0];
+                break;
+            case ("0"):
+                healthFlowerImage.sprite = null;
+                break;
+        }
     }
 
     public void HideHUD(bool isHidden)

@@ -66,6 +66,7 @@ public class GameManager : MonoBehaviour
 
         //Respawn and activate player and camera back in place
         HealthManager.instance.SetHealthToMax();
+        PlayerController.instance.PlayerHealingAnimation(false);
         UIManager.instance.fadeFromBlack = true;
         PlayerController.instance.gameObject.transform.position = respawnPosition;
         PlayerController.instance.gameObject.SetActive(true);

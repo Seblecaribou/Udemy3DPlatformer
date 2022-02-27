@@ -8,7 +8,7 @@ public class PlayerController : MonoBehaviour
     public static PlayerController instance;
 
     //Health
-    public int maxHealth = 3;
+    public int maxHealth = 5;
 
     //Movement related vairable
     public float moveSpeed = 5f;
@@ -155,9 +155,9 @@ public class PlayerController : MonoBehaviour
         Destroy(explosion, 2f);
     }
 
-    public void PlayerHealingAnimation()
+    public void PlayerHealingAnimation(bool isActive)
     {
-        healthParticles.SetActive(true);
+        healthParticles.SetActive(isActive);
     }
     #endregion
 }
