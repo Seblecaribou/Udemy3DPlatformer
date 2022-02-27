@@ -70,7 +70,6 @@ public class HealthManager : MonoBehaviour
     public void Heal(int healthPoints)
     { 
         currentHealth += healthPoints;
-        Debug.Log(currentHealth);
         if (currentHealth > PlayerController.instance.maxHealth) SetHealthToMax();
         PlayerController.instance.PlayerHealingAnimation(true);
     }
