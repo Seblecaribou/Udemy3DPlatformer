@@ -19,6 +19,9 @@ public class UIManager : MonoBehaviour
     public Text healthText;
     public Image healthFlowerImage;
     public Sprite[] healthFlowerSpriteSheet;
+
+    //CoinsUI
+    public Text coinsCounter;
     #endregion
 
     #region Awake
@@ -39,6 +42,7 @@ public class UIManager : MonoBehaviour
         FadeToBlack();
         FadeFromBlack();
         UpdateHealthUI();
+        UpdateCoinsUI();
     }
     #endregion
     
@@ -97,6 +101,10 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    private void UpdateCoinsUI()
+    {
+        coinsCounter.text = GameManager.instance.currentCoinsTotal.ToString();
+    }
     public void HideHUD(bool isHidden)
     {
         if (isHidden) HUD.SetActive(false);

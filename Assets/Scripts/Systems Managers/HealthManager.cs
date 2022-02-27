@@ -8,7 +8,7 @@ public class HealthManager : MonoBehaviour
     public static HealthManager instance;
 
     //Player health
-    public int currentHealth, maxHealth;
+    public int currentHealth;
 
     //Invicibility handler
     public float invincibilityLength = 2f;
@@ -70,7 +70,8 @@ public class HealthManager : MonoBehaviour
     public void Heal(int healthPoints)
     { 
         currentHealth += healthPoints;
-        if (currentHealth > maxHealth) SetHealthToMax();
+        Debug.Log(currentHealth);
+        if (currentHealth > PlayerController.instance.maxHealth) SetHealthToMax();
         PlayerController.instance.PlayerHealingAnimation(true);
     }
     #endregion

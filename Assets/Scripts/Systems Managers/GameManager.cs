@@ -7,13 +7,16 @@ public class GameManager : MonoBehaviour
     #region Variables
     public static GameManager instance;
 
+    //Respawn
     private Vector3 respawnPosition;
-
     public float respawnDelay = 3f;
 
     //Cursor
     public bool cursorVisible = false;
     public CursorLockMode cursorLockMode = CursorLockMode.Locked;
+
+    //Coins
+    public int currentCoinsTotal = 0;
     #endregion
 
     #region Awake
@@ -46,6 +49,11 @@ public class GameManager : MonoBehaviour
     public void SetSpawnPoint(Vector3 newSpawnPoint)
     {
         respawnPosition = newSpawnPoint;
+    }
+
+    public void AddCoin(int coinsToAdd)
+    {
+        currentCoinsTotal += coinsToAdd;
     }
 
     public void Respawn()

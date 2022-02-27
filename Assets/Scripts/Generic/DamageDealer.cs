@@ -27,7 +27,7 @@ public class DamageDealer : MonoBehaviour
     #region Methods
     void OnTriggerEnter(Collider other)
     {
-        HealthManager.instance.DealDamage(damage, canKnockback);
+        if (other.tag == "Player") HealthManager.instance.DealDamage(damage, canKnockback);
     }
     #endregion
 }
