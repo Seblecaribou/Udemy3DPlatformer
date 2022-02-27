@@ -41,6 +41,11 @@ public class HealthManager : MonoBehaviour
         currentHealth = PlayerController.instance.maxHealth;
     }
 
+    public void SetHealthToZero()
+    {
+        currentHealth = 0;
+    }
+
     public void SetInvincibility()
     {
         if (invincibilityCounter > 0) invincibilityCounter -= Time.deltaTime;

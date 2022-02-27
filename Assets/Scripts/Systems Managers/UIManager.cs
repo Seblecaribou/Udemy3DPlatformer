@@ -92,7 +92,7 @@ public class UIManager : MonoBehaviour
                 healthFlowerImage.sprite = healthFlowerSpriteSheet[0];
                 break;
             case ("0"):
-                healthFlowerImage.sprite = null;
+                healthFlowerImage.enabled = false;
                 break;
         }
     }

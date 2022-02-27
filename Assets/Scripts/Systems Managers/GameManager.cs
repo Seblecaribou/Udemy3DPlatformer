@@ -55,7 +55,10 @@ public class GameManager : MonoBehaviour
 
     public IEnumerator RespawnCoroutine()
     {
+        //TODO: refactor the coroutine
+
         //De-activate player and camera
+        HealthManager.instance.SetHealthToZero();
         PlayerController.instance.gameObject.SetActive(false);
         CameraController.instance.cinemachineBrain.enabled = false;
         UIManager.instance.fadeToBlack = true;
@@ -66,6 +69,7 @@ public class GameManager : MonoBehaviour
 
         //Respawn and activate player and camera back in place
         HealthManager.instance.SetHealthToMax();
+        UIManager.instance.healthFlowerImage.enabled = true;
         PlayerController.instance.PlayerHealingAnimation(false);
         UIManager.instance.fadeFromBlack = true;
         PlayerController.instance.gameObject.transform.position = respawnPosition;
