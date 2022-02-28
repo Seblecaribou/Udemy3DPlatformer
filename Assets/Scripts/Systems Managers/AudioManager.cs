@@ -10,7 +10,7 @@ public class AudioManager : MonoBehaviour
     public AudioSource[] allMusics;
     public AudioSource[] allSFX;
 
-    public int levelMusic;
+    public int levelMusic = 0;
     #endregion
 
     #region Awake
