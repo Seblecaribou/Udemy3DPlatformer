@@ -6,6 +6,8 @@ public class HealthPickup : MonoBehaviour
 {
     #region Variables
     public int healthPoints = 1;
+    public int healthPickupSound = 7;
+
     #endregion
 
     #region Awake
@@ -27,8 +29,12 @@ public class HealthPickup : MonoBehaviour
     #region Methods
     void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Player") HealthManager.instance.Heal(healthPoints);
-        Destroy(gameObject);
+        if (other.tag == "Player")
+        {
+            HealthManager.instance.Heal(healthPoints);
+            AudioManager.instance.PlaySFX(true, healthPickupSound);
+            Destroy(gameObject);
+        }
     }
     #endregion
 }

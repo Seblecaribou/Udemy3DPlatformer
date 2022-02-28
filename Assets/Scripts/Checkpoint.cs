@@ -7,6 +7,7 @@ public class Checkpoint : MonoBehaviour
     #region Variables
     public GameObject checkpointOn;
     public GameObject checkpointOff;
+    public int checkpointSound;
     #endregion
 
     #region Awake
@@ -34,6 +35,7 @@ public class Checkpoint : MonoBehaviour
         {
             //Change spawn point
             GameManager.instance.SetSpawnPoint(transform.position);
+            AudioManager.instance.PlaySFX(true, checkpointSound);
 
             //De-activates all checkpoints before activating the triggered one
             Checkpoint[] allCheckpoints = FindObjectsOfType<Checkpoint>();

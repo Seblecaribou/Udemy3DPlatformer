@@ -41,5 +41,14 @@ public class AudioManager : MonoBehaviour
         }
         allMusics[trackIndex].Play();
     }
+
+    public void PlaySFX(bool onTop, int sfxIndex)
+    {
+        if (!onTop)
+        {
+            foreach (AudioSource sfx in allSFX) sfx.Stop();
+        }
+        allSFX[sfxIndex].Play();
+    }
     #endregion
 }

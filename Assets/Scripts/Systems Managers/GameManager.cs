@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
 
     //Coins
     public int currentCoinsTotal = 0;
+    public int hurtSound = 8;
     #endregion
 
     #region Awake
@@ -66,9 +67,11 @@ public class GameManager : MonoBehaviour
         //TODO: refactor the coroutine
 
         //De-activate player and camera
+        
         HealthManager.instance.SetHealthToZero();
         PlayerController.instance.gameObject.SetActive(false);
         CameraController.instance.cinemachineBrain.enabled = false;
+        AudioManager.instance.PlaySFX(false, hurtSound);
         UIManager.instance.fadeToBlack = true;
         PlayerController.instance.PlayerExplosionAnimation();
 

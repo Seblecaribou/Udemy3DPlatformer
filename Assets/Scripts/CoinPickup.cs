@@ -7,6 +7,7 @@ public class CoinPickup : MonoBehaviour
     #region Variables
     public int coinValue = 1;
     public GameObject shinyEffect;
+    public int coinPickupSound = 5;
     #endregion
 
     #region Awake
@@ -32,9 +33,9 @@ public class CoinPickup : MonoBehaviour
         {
             GameManager.instance.AddCoin(coinValue);
             Destroy(gameObject);
+            AudioManager.instance.PlaySFX(true, coinPickupSound);
             GameObject coinEffect = Instantiate(shinyEffect, transform.position, transform.rotation);
             Destroy(coinEffect, 1f);
-
         }
     }
     #endregion

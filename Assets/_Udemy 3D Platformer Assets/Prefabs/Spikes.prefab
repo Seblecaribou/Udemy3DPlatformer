@@ -27,6 +27,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 1
   canKnockback: 1
+  hurtSound: 8
 --- !u!1 &9079851337009625606
 GameObject:
   m_ObjectHideFlags: 0

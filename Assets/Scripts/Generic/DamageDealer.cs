@@ -7,6 +7,7 @@ public class DamageDealer : MonoBehaviour
     #region Variables
     public int damage = 1;
     public bool canKnockback = true;
+    public int hurtSound = 8;
     #endregion
 
     #region Awake
@@ -27,7 +28,11 @@ public class DamageDealer : MonoBehaviour
     #region Methods
     void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Player") HealthManager.instance.DealDamage(damage, canKnockback);
+        if (other.tag == "Player")
+        {
+            HealthManager.instance.DealDamage(damage, canKnockback);
+            AudioManager.instance.PlaySFX(true, hurtSound);
+        } 
     }
     #endregion
 }
