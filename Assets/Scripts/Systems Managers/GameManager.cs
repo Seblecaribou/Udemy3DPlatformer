@@ -11,10 +11,6 @@ public class GameManager : MonoBehaviour
     private Vector3 respawnPosition;
     public float respawnDelay = 3f;
 
-    //Cursor
-    public bool cursorVisible = false;
-    public CursorLockMode cursorLockMode = CursorLockMode.Locked;
-
     //Coins
     public int currentCoinsTotal = 0;
     public int hurtSound = 8;
@@ -30,21 +26,39 @@ public class GameManager : MonoBehaviour
     #region Start and Update
     void Start()
     {
-        CursorHandler();
+        CursorHandler(false, CursorLockMode.Locked);
+        CursorHandler(true, CursorLockMode.None);
         respawnPosition = PlayerController.instance.transform.position;
     }
 
     void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.Escape)) PauseUnpause();
     }
     #endregion
 
     #region Methods
-    private void CursorHandler()
+    private void CursorHandler(bool cursorVisible, CursorLockMode lockMode)
     {
         Cursor.visible = cursorVisible;
-        Cursor.lockState = cursorLockMode;
+        Cursor.lockState = lockMode;
+    }
+
+    public void PauseUnpause()
+    {
+        UIManager.instance.CloseOptionsMenu();
+        if (UIManager.instance.pausePanel.activeInHierarchy)
+        {
+            UIManager.instance.pausePanel.SetActive(false);
+            Time.timeScale = 1;
+            CursorHandler(false, CursorLockMode.Locked);
+        }
+        else
+        {
+            UIManager.instance.pausePanel.SetActive(true);
+            Time.timeScale = 0f;
+            CursorHandler(true, CursorLockMode.None);
+        }
     }
 
     public void SetSpawnPoint(Vector3 newSpawnPoint)

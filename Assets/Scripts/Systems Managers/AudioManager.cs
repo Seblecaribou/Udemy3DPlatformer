@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class AudioManager : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class AudioManager : MonoBehaviour
 
     public AudioSource[] allMusics;
     public AudioSource[] allSFX;
+    public AudioMixerGroup musicMixer, sfxMixer, masterMixer;
 
     public int levelMusic = 0;
     #endregion
@@ -49,6 +51,21 @@ public class AudioManager : MonoBehaviour
             foreach (AudioSource sfx in allSFX) sfx.Stop();
         }
         allSFX[sfxIndex].Play();
+    }
+
+    public void SetMasterLevel()
+    {
+        masterMixer.audioMixer.SetFloat("MasterVolume", UIManager.instance.masterSlider.value);
+    }
+
+    public void SetSFXLevel()
+    {
+        sfxMixer.audioMixer.SetFloat("SFXVolume", UIManager.instance.sfxSlider.value);
+    }
+
+    public void SetMusicLevel()
+    {
+        musicMixer.audioMixer.SetFloat("MusicVolume", UIManager.instance.musicSlider.value);
     }
     #endregion
 }

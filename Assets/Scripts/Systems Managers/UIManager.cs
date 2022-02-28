@@ -9,6 +9,8 @@ public class UIManager : MonoBehaviour
     public static UIManager instance;
 
     public GameObject HUD;
+    public GameObject pausePanel;
+    public GameObject soundSettingsPanel;
 
     //Black screen
     public Image blackScreen;
@@ -22,6 +24,9 @@ public class UIManager : MonoBehaviour
 
     //CoinsUI
     public Text coinsCounter;
+
+    //Music Settings UI
+    public Slider masterSlider, sfxSlider, musicSlider;
     #endregion
 
     #region Awake
@@ -109,6 +114,46 @@ public class UIManager : MonoBehaviour
     {
         if (isHidden) HUD.SetActive(false);
         if (!isHidden) HUD.SetActive(true);
+    }
+    
+    public void Resume()
+    {
+        GameManager.instance.PauseUnpause();
+    }
+
+    public void LevelSelectMenu()
+    {
+
+    }
+
+    public void OpenOptionMenu()
+    {
+        soundSettingsPanel.SetActive(true);
+    }
+
+    public void CloseOptionsMenu()
+    {
+        soundSettingsPanel.SetActive(false);
+    }
+
+    public void SetMasterLevel()
+    {
+        AudioManager.instance.SetMasterLevel();
+    }
+
+    public void SetSFXLevel()
+    {
+        AudioManager.instance.SetSFXLevel();
+    }
+
+    public void SetMusicLevel()
+    {
+        AudioManager.instance.SetMusicLevel();
+    }
+
+    public void MainMenu()
+    {
+
     }
     #endregion
 }
