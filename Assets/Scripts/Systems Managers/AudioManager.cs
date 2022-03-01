@@ -53,19 +53,20 @@ public class AudioManager : MonoBehaviour
         allSFX[sfxIndex].Play();
     }
 
-    public void SetMasterLevel()
+    public void SetSoundLevel(string volumeType)
     {
-        masterMixer.audioMixer.SetFloat("MasterVolume", UIManager.instance.masterSlider.value);
-    }
-
-    public void SetSFXLevel()
-    {
-        sfxMixer.audioMixer.SetFloat("SFXVolume", UIManager.instance.sfxSlider.value);
-    }
-
-    public void SetMusicLevel()
-    {
-        musicMixer.audioMixer.SetFloat("MusicVolume", UIManager.instance.musicSlider.value);
+        switch (volumeType)
+        {
+            case "Master":
+                masterMixer.audioMixer.SetFloat("MasterVolume", UIManager.instance.masterSlider.value);
+                break;
+            case "SFX":
+                sfxMixer.audioMixer.SetFloat("SFXVolume", UIManager.instance.sfxSlider.value);
+                break;
+            case "Music":
+                musicMixer.audioMixer.SetFloat("MusicVolume", UIManager.instance.musicSlider.value);
+                break;
+        }
     }
     #endregion
 }
