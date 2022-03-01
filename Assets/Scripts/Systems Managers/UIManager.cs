@@ -136,17 +136,17 @@ public class UIManager : MonoBehaviour
         soundSettingsPanel.SetActive(false);
     }
 
-    public void SetMasterLevel()
+    public void MasterSliderHandler()
     {
         AudioManager.instance.SetSoundLevel("Master");
     }
 
-    public void SetSFXLevel()
+    public void SFXSliderHandler()
     {
         AudioManager.instance.SetSoundLevel("SFX");
     }
 
-    public void SetMusicLevel()
+    public void MusicSliderHandler()
     {
         AudioManager.instance.SetSoundLevel("Music");
     }

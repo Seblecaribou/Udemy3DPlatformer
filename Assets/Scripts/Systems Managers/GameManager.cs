@@ -28,7 +28,7 @@ public class GameManager : MonoBehaviour
     {
         CursorHandler(false, CursorLockMode.Locked);
         CursorHandler(true, CursorLockMode.None);
-        respawnPosition = PlayerController.instance.transform.position;
+        SetSpawnPoint(PlayerController.instance.transform.position);
     }
 
     void Update()
