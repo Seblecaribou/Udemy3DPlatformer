@@ -12,14 +12,18 @@ public class EnemyController : MonoBehaviour
     public int currentPatrolPointIndex;
     public float waitAtPoint = 2f;
     public float counter;
+    public float detectionRange = 3f;
+    public float attackRange = 1f;
 
     public Animator enemyAnimator;
-    public float runAnimationSpeed = 2f;
+    public float runAnimationSpeed = 1f;
+    public float chaseAnimationSpeed = 2f;
 
     public enum AIState
     {
         isIdling,
-        isPatrolling
+        isPatrolling,
+        isChasing
     }
     public AIState currentState;
     #endregion
@@ -45,9 +49,10 @@ public class EnemyController : MonoBehaviour
                     counter -= Time.deltaTime;
                 } else
                 {
-                    SetPatrolDestination();
+                    SetPatrolDestination(patrolPoints[currentPatrolPointIndex].position);
                     StateHandler(AIState.isPatrolling);
-                } 
+                }
+                if (PlayerDetector(detectionRange)) StateHandler(AIState.isChasing);
                 break;
 
             case AIState.isPatrolling:
@@ -58,6 +63,18 @@ public class EnemyController : MonoBehaviour
                     StateHandler(AIState.isIdling);
                     counter = waitAtPoint;
                 }
+                if (PlayerDetector(detectionRange)) StateHandler(AIState.isChasing);
+                break;
+
+            case AIState.isChasing:
+                AnimationHandler(true, chaseAnimationSpeed);
+                agent.speed = 4f;
+                if (!PlayerDetector(detectionRange)) 
+                {
+                    StateHandler(AIState.isPatrolling);
+                    SetPatrolDestination(patrolPoints[currentPatrolPointIndex].position);
+                }
+                SetPatrolDestination(PlayerController.instance.transform.position);
                 break;
         }
     }
@@ -65,9 +82,9 @@ public class EnemyController : MonoBehaviour
 
     #region Methods
 
-    private void SetPatrolDestination()
+    private void SetPatrolDestination(Vector3 newDestination)
     {     
-        agent.SetDestination(patrolPoints[currentPatrolPointIndex].position);
+        agent.SetDestination(newDestination);
     }
 
     private void ChangeCurrentPatrolPoint()
@@ -85,6 +102,12 @@ public class EnemyController : MonoBehaviour
     private void StateHandler(AIState state)
     {
         currentState = state;
+    }
+
+    private bool PlayerDetector(float rangeToEvaluate)
+    {
+        float distanceToPlayer = Vector3.Distance(transform.position, PlayerController.instance.transform.position);
+        return distanceToPlayer > rangeToEvaluate ? false : true;
     }
     #endregion
 }
