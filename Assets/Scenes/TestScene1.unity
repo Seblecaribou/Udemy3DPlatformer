@@ -188,53 +188,6 @@ Transform:
   m_Father: {fileID: 957234575}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &575750222 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 65124159981741896, guid: ee65d989cd715534aad85f0cdca97068,
-    type: 3}
-  m_PrefabInstance: {fileID: 1807889865}
-  m_PrefabAsset: {fileID: 0}
---- !u!195 &575750223
-NavMeshAgent:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 575750222}
-  m_Enabled: 1
-  m_AgentTypeID: 0
-  m_Radius: 0.5
-  m_Speed: 3.5
-  m_Acceleration: 8
-  avoidancePriority: 50
-  m_AngularSpeed: 120
-  m_StoppingDistance: 0
-  m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 1
-  m_AutoRepath: 1
-  m_Height: 2
-  m_BaseOffset: 0
-  m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
---- !u!114 &575750224
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 575750222}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: df5bffaef2b97724f8f1b0d78e0cb8bd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  agent: {fileID: 575750223}
-  patrolPoints:
-  - {fileID: 1688475166}
-  - {fileID: 2031781211}
-  - {fileID: 1061000528}
-  - {fileID: 525429788}
-  currentPatrolPointIndex: 0
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -942,6 +895,30 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 575750224, guid: ee65d989cd715534aad85f0cdca97068, type: 3}
+      propertyPath: waitAtPoint
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 575750224, guid: ee65d989cd715534aad85f0cdca97068, type: 3}
+      propertyPath: patrolPoints.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 575750224, guid: ee65d989cd715534aad85f0cdca97068, type: 3}
+      propertyPath: patrolPoints.Array.data[0]
+      value: 
+      objectReference: {fileID: 1688475166}
+    - target: {fileID: 575750224, guid: ee65d989cd715534aad85f0cdca97068, type: 3}
+      propertyPath: patrolPoints.Array.data[1]
+      value: 
+      objectReference: {fileID: 2031781211}
+    - target: {fileID: 575750224, guid: ee65d989cd715534aad85f0cdca97068, type: 3}
+      propertyPath: patrolPoints.Array.data[2]
+      value: 
+      objectReference: {fileID: 1061000528}
+    - target: {fileID: 575750224, guid: ee65d989cd715534aad85f0cdca97068, type: 3}
+      propertyPath: patrolPoints.Array.data[3]
+      value: 
+      objectReference: {fileID: 525429788}
     - target: {fileID: 65124159981741896, guid: ee65d989cd715534aad85f0cdca97068,
         type: 3}
       propertyPath: m_Name
@@ -1421,6 +1398,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 184935756435988502, guid: 2f6af0e7e91e820489a236a202a61c38,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 184935757041650907, guid: 2f6af0e7e91e820489a236a202a61c38,
         type: 3}
