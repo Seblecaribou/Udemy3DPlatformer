@@ -27,7 +27,6 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         CursorHandler(false, CursorLockMode.Locked);
-        CursorHandler(true, CursorLockMode.None);
         SetSpawnPoint(PlayerController.instance.transform.position);
     }
 

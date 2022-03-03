@@ -17,13 +17,19 @@ public class EnemyController : MonoBehaviour
 
     public Animator enemyAnimator;
     public float runAnimationSpeed = 1f;
+    public float runSpeed = 3f;
     public float chaseAnimationSpeed = 2f;
+    public float chaseSpeed = 4f;
+    public float attackAnimationSpeed = 1f;
+    public float nextAttackDelay = 1.5f;
+    public float attackCounter;
 
     public enum AIState
     {
         isIdling,
         isPatrolling,
-        isChasing
+        isChasing,
+        isAttacking
     }
     public AIState currentState;
     #endregion
@@ -43,20 +49,20 @@ public class EnemyController : MonoBehaviour
         switch (currentState)
         {
             case AIState.isIdling:
-                AnimationHandler(false, runAnimationSpeed);
+                RunHandler(false, runAnimationSpeed, runSpeed);
                 if (counter > 0)
                 {
                     counter -= Time.deltaTime;
                 } else
                 {
-                    SetPatrolDestination(patrolPoints[currentPatrolPointIndex].position);
+                    SetEnemyTarget(patrolPoints[currentPatrolPointIndex].position);
                     StateHandler(AIState.isPatrolling);
                 }
                 if (PlayerDetector(detectionRange)) StateHandler(AIState.isChasing);
                 break;
 
             case AIState.isPatrolling:
-                AnimationHandler(true, runAnimationSpeed);
+                RunHandler(true, runAnimationSpeed, runSpeed);
                 if (agent.remainingDistance <= .2f)
                 {
                     ChangeCurrentPatrolPoint();
@@ -67,14 +73,42 @@ public class EnemyController : MonoBehaviour
                 break;
 
             case AIState.isChasing:
-                AnimationHandler(true, chaseAnimationSpeed);
                 agent.speed = 4f;
-                if (!PlayerDetector(detectionRange)) 
+                RunHandler(true, chaseAnimationSpeed, chaseSpeed);
+                if (!PlayerDetector(detectionRange))
                 {
                     StateHandler(AIState.isPatrolling);
-                    SetPatrolDestination(patrolPoints[currentPatrolPointIndex].position);
+                    SetEnemyTarget(patrolPoints[currentPatrolPointIndex].position);
                 }
-                SetPatrolDestination(PlayerController.instance.transform.position);
+                if (PlayerDetector(attackRange))
+                {
+                    currentState = AIState.isAttacking;
+                    RunHandler(false, runAnimationSpeed, runSpeed);
+                    AttackAnimationHandler();
+                    agent.velocity = Vector3.zero;
+                    agent.isStopped = true;
+
+                    attackCounter = nextAttackDelay;
+                } 
+                SetEnemyTarget(PlayerController.instance.transform.position);
+                break;
+
+            case AIState.isAttacking:
+                attackCounter -= Time.deltaTime;
+                if (attackCounter <= 0)
+                {
+                    if (PlayerDetector(attackRange))
+                    {
+                        AttackAnimationHandler();
+                        attackCounter = nextAttackDelay;
+                    }
+                    if (PlayerDetector(detectionRange) && !PlayerDetector(attackRange)) 
+                    { 
+                        agent.isStopped = false;
+                        SetEnemyTarget(PlayerController.instance.transform.position);
+                        currentState = AIState.isChasing;
+                    } 
+                }
                 break;
         }
     }
@@ -82,7 +116,7 @@ public class EnemyController : MonoBehaviour
 
     #region Methods
 
-    private void SetPatrolDestination(Vector3 newDestination)
+    private void SetEnemyTarget(Vector3 newDestination)
     {     
         agent.SetDestination(newDestination);
     }
@@ -93,10 +127,19 @@ public class EnemyController : MonoBehaviour
         if (currentPatrolPointIndex == patrolPoints.Length) currentPatrolPointIndex = 0;
     }
     
-    private void AnimationHandler(bool isMoving, float animationSpeed)
+    private void RunHandler(bool isMoving, float animationSpeed, float agentSpeed)
     { 
         enemyAnimator.speed = animationSpeed;
         enemyAnimator.SetBool("isMoving", isMoving);
+        agent.speed = agentSpeed;
+    }
+
+    private void AttackAnimationHandler()
+    {
+        transform.LookAt(PlayerController.instance.transform, Vector3.up);
+        transform.rotation = Quaternion.Euler(0f, transform.rotation.eulerAngles.y, 0f);
+        enemyAnimator.speed = attackAnimationSpeed;
+        enemyAnimator.SetTrigger("Attack");
     }
 
     private void StateHandler(AIState state)
