@@ -9,6 +9,7 @@ public class EnemyHealthManager : MonoBehaviour
     private int currentHealth;
 
     public int deathSound;
+    public GameObject enemyExplosion;
     #endregion
 
     #region Awake
@@ -35,6 +36,9 @@ public class EnemyHealthManager : MonoBehaviour
         {
             AudioManager.instance.PlaySFX(true, deathSound);
             Destroy(gameObject);
+            GameObject explosion = Instantiate(enemyExplosion, transform.position + new Vector3(0, 1f, 0), transform.rotation);
+            Destroy(explosion, 3f);
+
         }
     }
     #endregion
