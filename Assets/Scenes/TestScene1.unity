@@ -121,31 +121,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 23800000, guid: 1f83e77911b5619419aabc8179e3e0ee, type: 2}
---- !u!1 &37029863 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8642208379556754559, guid: 65909b3f59a52e340b99ffa73d7a3c95,
-    type: 3}
-  m_PrefabInstance: {fileID: 8642208379522479000}
-  m_PrefabAsset: {fileID: 0}
---- !u!95 &37029864
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 37029863}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: aedaefcfe97e1954ba3e5c72b01f1e02, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!4 &37029867 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8642208379556754544, guid: 65909b3f59a52e340b99ffa73d7a3c95,
@@ -699,6 +674,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b2326eeff75cb5745a01a5bb5d7b26c2, type: 3}
+--- !u!95 &1414808746 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 901990790034255856, guid: ee65d989cd715534aad85f0cdca97068,
+    type: 3}
+  m_PrefabInstance: {fileID: 1807889865}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1522393659
 GameObject:
   m_ObjectHideFlags: 0
@@ -1134,10 +1115,26 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1701169343526585861, guid: ee65d989cd715534aad85f0cdca97068,
         type: 3}
+      propertyPath: lootToDrop
+      value: 
+      objectReference: {fileID: 8642208379556754559, guid: b2326eeff75cb5745a01a5bb5d7b26c2,
+        type: 3}
+    - target: {fileID: 1701169343526585861, guid: ee65d989cd715534aad85f0cdca97068,
+        type: 3}
       propertyPath: enemyExplosion
       value: 
       objectReference: {fileID: 102214696069463980, guid: 41fee670ccc80204e99a259e5761b63d,
         type: 3}
+    - target: {fileID: 1701169343526585861, guid: ee65d989cd715534aad85f0cdca97068,
+        type: 3}
+      propertyPath: skeletonAnimator
+      value: 
+      objectReference: {fileID: 1414808746}
+    - target: {fileID: 1701169343526585861, guid: ee65d989cd715534aad85f0cdca97068,
+        type: 3}
+      propertyPath: numberOfLootToDrop
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 3325725758171702482, guid: ee65d989cd715534aad85f0cdca97068,
         type: 3}
       propertyPath: m_RootOrder

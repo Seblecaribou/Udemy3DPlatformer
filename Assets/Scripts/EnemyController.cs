@@ -52,7 +52,7 @@ public class EnemyController : MonoBehaviour
                 RunHandler(false, runAnimationSpeed, runSpeed);
                 if (counter > 0)
                 {
-                    counter -= Time.deltaTime;
+                    CountDown(counter);
                 } else
                 {
                     SetEnemyTarget(patrolPoints[currentPatrolPointIndex].position);
@@ -67,7 +67,7 @@ public class EnemyController : MonoBehaviour
                 {
                     ChangeCurrentPatrolPoint();
                     StateHandler(AIState.isIdling);
-                    counter = waitAtPoint;
+                    ResetCounter(counter, waitAtPoint);
                 }
                 if (PlayerDetector(detectionRange)) StateHandler(AIState.isChasing);
                 break;
@@ -82,31 +82,31 @@ public class EnemyController : MonoBehaviour
                 }
                 if (PlayerDetector(attackRange))
                 {
-                    currentState = AIState.isAttacking;
+                    StateHandler(AIState.isAttacking);
                     RunHandler(false, runAnimationSpeed, runSpeed);
                     AttackAnimationHandler();
                     agent.velocity = Vector3.zero;
                     agent.isStopped = true;
 
-                    attackCounter = nextAttackDelay;
-                } 
+                    ResetCounter(attackCounter, nextAttackDelay);
+                }
                 SetEnemyTarget(PlayerController.instance.transform.position);
                 break;
 
             case AIState.isAttacking:
-                attackCounter -= Time.deltaTime;
+                CountDown(attackCounter);
                 if (attackCounter <= 0)
                 {
                     if (PlayerDetector(attackRange))
                     {
                         AttackAnimationHandler();
-                        attackCounter = nextAttackDelay;
+                        ResetCounter(attackCounter, nextAttackDelay);
                     }
                     if (PlayerDetector(detectionRange) && !PlayerDetector(attackRange)) 
                     { 
                         agent.isStopped = false;
                         SetEnemyTarget(PlayerController.instance.transform.position);
-                        currentState = AIState.isChasing;
+                        StateHandler(AIState.isChasing);
                     } 
                 }
                 break;
@@ -115,11 +115,32 @@ public class EnemyController : MonoBehaviour
     #endregion
 
     #region Methods
+    private void StateHandler(AIState state)
+    {
+        currentState = state;
+    }
 
+    //TODO: put in lib
+    public void CountDown(float counter)
+    {
+        counter -= Time.deltaTime;
+    }
+
+    //TODO: put in lib
+    public void ResetCounter(float counter, float maxCounterValue)
+    {
+        counter = maxCounterValue;
+    }
+    
+    /// <summary>
+    /// Set a NavMeshAgent's target passing the target as argument
+    /// </summary>
+    /// <param name="newDestination"></param>
     private void SetEnemyTarget(Vector3 newDestination)
     {     
         agent.SetDestination(newDestination);
     }
+
 
     private void ChangeCurrentPatrolPoint()
     {
@@ -141,12 +162,7 @@ public class EnemyController : MonoBehaviour
         enemyAnimator.speed = attackAnimationSpeed;
         enemyAnimator.SetTrigger("Attack");
     }
-
-    private void StateHandler(AIState state)
-    {
-        currentState = state;
-    }
-
+    
     private bool PlayerDetector(float rangeToEvaluate)
     {
         float distanceToPlayer = Vector3.Distance(transform.position, PlayerController.instance.transform.position);

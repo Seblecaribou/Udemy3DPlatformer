@@ -65,6 +65,11 @@ public class GameManager : MonoBehaviour
         respawnPosition = newSpawnPoint;
     }
 
+    public void SetTimeOut(float delay)
+    {
+
+    }
+
     public void AddCoin(int coinsToAdd)
     {
         currentCoinsTotal += coinsToAdd;
