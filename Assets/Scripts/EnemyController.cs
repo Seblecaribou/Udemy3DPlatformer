@@ -10,8 +10,8 @@ public class EnemyController : MonoBehaviour
 
     public Transform[] patrolPoints;
     public int currentPatrolPointIndex;
-    public float waitAtPoint = 2f;
-    public float counter;
+    public float waitAtPatrolPoint = 2f;
+    public float patrolCounter;
     public float detectionRange = 3f;
     public float attackRange = 1f;
 
@@ -41,7 +41,7 @@ public class EnemyController : MonoBehaviour
     #region Start and Update
     void Start()
     {
-        counter = waitAtPoint;
+        patrolCounter = waitAtPatrolPoint;
     }
 
     void Update()
@@ -50,9 +50,9 @@ public class EnemyController : MonoBehaviour
         {
             case AIState.isIdling:
                 RunHandler(false, runAnimationSpeed, runSpeed);
-                if (counter > 0)
+                if (patrolCounter > 0)
                 {
-                    CountDown(counter);
+                    CountDown(ref patrolCounter);
                 } else
                 {
                     SetEnemyTarget(patrolPoints[currentPatrolPointIndex].position);
@@ -67,7 +67,7 @@ public class EnemyController : MonoBehaviour
                 {
                     ChangeCurrentPatrolPoint();
                     StateHandler(AIState.isIdling);
-                    ResetCounter(counter, waitAtPoint);
+                    ResetCounter(ref patrolCounter, waitAtPatrolPoint);
                 }
                 if (PlayerDetector(detectionRange)) StateHandler(AIState.isChasing);
                 break;
@@ -88,19 +88,19 @@ public class EnemyController : MonoBehaviour
                     agent.velocity = Vector3.zero;
                     agent.isStopped = true;
 
-                    ResetCounter(attackCounter, nextAttackDelay);
+                    ResetCounter(ref attackCounter, nextAttackDelay);
                 }
                 SetEnemyTarget(PlayerController.instance.transform.position);
                 break;
 
             case AIState.isAttacking:
-                CountDown(attackCounter);
+                CountDown(ref attackCounter);
                 if (attackCounter <= 0)
                 {
                     if (PlayerDetector(attackRange))
                     {
                         AttackAnimationHandler();
-                        ResetCounter(attackCounter, nextAttackDelay);
+                        ResetCounter(ref attackCounter, nextAttackDelay);
                     }
                     if (PlayerDetector(detectionRange) && !PlayerDetector(attackRange)) 
                     { 
@@ -121,13 +121,13 @@ public class EnemyController : MonoBehaviour
     }
 
     //TODO: put in lib
-    public void CountDown(float counter)
+    public void CountDown(ref float counter)
     {
         counter -= Time.deltaTime;
     }
 
     //TODO: put in lib
-    public void ResetCounter(float counter, float maxCounterValue)
+    public void ResetCounter(ref float counter, float maxCounterValue)
     {
         counter = maxCounterValue;
     }
@@ -140,7 +140,6 @@ public class EnemyController : MonoBehaviour
     {     
         agent.SetDestination(newDestination);
     }
-
 
     private void ChangeCurrentPatrolPoint()
     {
@@ -163,6 +162,12 @@ public class EnemyController : MonoBehaviour
         enemyAnimator.SetTrigger("Attack");
     }
     
+    /// <summary>
+    /// Evaluate distance between the holder's transform position and the PlayerController's based of a range.
+    /// Returns true if player is in range, false if not.
+    /// </summary>
+    /// <param name="rangeToEvaluate"></param>
+    /// <returns></returns>
     private bool PlayerDetector(float rangeToEvaluate)
     {
         float distanceToPlayer = Vector3.Distance(transform.position, PlayerController.instance.transform.position);
