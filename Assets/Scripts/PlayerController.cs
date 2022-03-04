@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour
     public float moveSpeed = 5f;
     public float jumpForce = 10f;
     public float gravityScale = 5f;
+    public float bounceForce = 8f;
 
     //Character controls
     private Vector3 moveDirection;
@@ -133,6 +134,12 @@ public class PlayerController : MonoBehaviour
         moveDirection.y = knockbackPower.y;
     }
     
+    public void BouncePlayer(float bounceMultiplier)
+    {
+        moveDirection.y = bounceForce * bounceMultiplier;
+        charControl.Move(moveDirection * Time.deltaTime);
+    }
+
     public void PlayerFlicker(float countdown, float flickeringIntensity)
     {
         foreach (GameObject playerPiece in playerPieces)
@@ -159,5 +166,6 @@ public class PlayerController : MonoBehaviour
     {
         healthParticles.SetActive(isActive);
     }
+    
     #endregion
 }

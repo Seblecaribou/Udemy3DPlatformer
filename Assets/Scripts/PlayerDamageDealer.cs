@@ -25,10 +25,10 @@ public class PlayerDamageDealer : MonoBehaviour
     #region Methods
     void OnTriggerEnter(Collider other)
     {
-        Debug.Log(other);
         if (other.tag == "Enemy")
         {
             other.GetComponent<EnemyHealthManager>().TakeDamage();
+            PlayerController.instance.BouncePlayer(1f);
         }
     }
     #endregion
