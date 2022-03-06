@@ -32,7 +32,7 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape)) PauseUnpause();
+        if (Input.GetButtonDown("Cancel")) PauseUnpause();
     }
     #endregion
 

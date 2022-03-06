@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3670706609075836809}
   - component: {fileID: 3670706609075836808}
   - component: {fileID: 374136967161235364}
+  - component: {fileID: 1231689994}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -44,8 +45,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14978197c0424574fad5a40798dbee33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cursorVisible: 0
-  cursorLockMode: 1
+  respawnDelay: 3
+  currentCoinsTotal: 0
+  hurtSound: 8
 --- !u!114 &374136967161235364
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -58,3 +60,46 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 480c646f4b1052f4cb6d1d038bcaa57a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentHealth: 0
+  invincibilityLength: 2
+  invincibilityCounter: 0
+  flickeringIntensity: 25
+--- !u!114 &1231689994
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3670706609075836810}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70525a71c0b176d459d41b80cb46a354, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  allMusics:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  allSFX:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  musicMixer: {fileID: 2709949880320862251, guid: 6b6218eeb14845e4e95a0111e1af06de,
+    type: 2}
+  sfxMixer: {fileID: -2158530547148550521, guid: 6b6218eeb14845e4e95a0111e1af06de,
+    type: 2}
+  masterMixer: {fileID: 24300002, guid: 6b6218eeb14845e4e95a0111e1af06de, type: 2}
+  levelMusic: 1
