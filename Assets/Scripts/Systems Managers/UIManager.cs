@@ -122,11 +122,6 @@ public class UIManager : MonoBehaviour
         GameManager.instance.PauseUnpause();
     }
 
-    public void MenuNavigation()
-    {
-        if (Input.GetAxisRaw("Vertical") > 0) return ;
-    }
-
     public void LevelSelectMenu()
     {
 
@@ -135,11 +130,17 @@ public class UIManager : MonoBehaviour
     public void OpenOptionMenu()
     {
         soundSettingsPanel.SetActive(true);
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(GameManager.instance.optionsFirstGameObject);
+
     }
 
     public void CloseOptionsMenu()
     {
         soundSettingsPanel.SetActive(false);
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(GameManager.instance.pauseFirstGameObject);
+
     }
 
     public void MasterSliderHandler()

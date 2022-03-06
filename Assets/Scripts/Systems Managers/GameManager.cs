@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class GameManager : MonoBehaviour
 {
@@ -14,6 +15,9 @@ public class GameManager : MonoBehaviour
     //Coins
     public int currentCoinsTotal = 0;
     public int hurtSound = 8;
+
+    //Menus
+    public GameObject pauseFirstGameObject, optionsFirstGameObject;
     #endregion
 
     #region Awake
@@ -56,6 +60,9 @@ public class GameManager : MonoBehaviour
         {
             UIManager.instance.pausePanel.SetActive(true);
             Time.timeScale = 0f;
+            Debug.Log("I'm Here!");
+            EventSystem.current.SetSelectedGameObject(null);
+            EventSystem.current.SetSelectedGameObject(pauseFirstGameObject);
             CursorHandler(true, CursorLockMode.None);
         }
     }
