@@ -140,7 +140,6 @@ public class UIManager : MonoBehaviour
         soundSettingsPanel.SetActive(false);
         EventSystem.current.SetSelectedGameObject(null);
         EventSystem.current.SetSelectedGameObject(GameManager.instance.pauseFirstGameObject);
-
     }
 
     public void MasterSliderHandler()
