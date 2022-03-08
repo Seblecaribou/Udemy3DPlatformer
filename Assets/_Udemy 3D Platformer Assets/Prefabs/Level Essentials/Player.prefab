@@ -46,14 +46,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 408fe29989f644b4ea66956c471b76d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxHealth: 5
   moveSpeed: 5
   jumpForce: 10
   gravityScale: 2
+  bounceForce: 8
   charControl: {fileID: 5328900702593526094}
   playerCamera: {fileID: 0}
   rotateSpeed: 5
   playerModel: {fileID: 1684854614229843040}
   playerAnimator: {fileID: 3449600696443948770}
+  playerExplosion: {fileID: 4975168481234586691, guid: cd64001f62decf94fa99a4254962a1ae,
+    type: 3}
+  healthParticles: {fileID: 0}
+  isKnockedBack: 0
+  knockbackLength: 0.5
+  knockbackPower: {x: 0, y: 0}
+  playerPieces: []
+  isStopped: 0
 --- !u!143 &5328900702593526094
 CharacterController:
   m_ObjectHideFlags: 0

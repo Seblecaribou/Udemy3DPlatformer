@@ -7979,6 +7979,16 @@ PrefabInstance:
       objectReference: {fileID: 237847746}
     - target: {fileID: 3670706609075836808, guid: b0f44113fd0fecb49977d4a7c5effed7,
         type: 3}
+      propertyPath: nextLevel
+      value: Level1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3670706609075836808, guid: b0f44113fd0fecb49977d4a7c5effed7,
+        type: 3}
+      propertyPath: victoryMusicIndex
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3670706609075836808, guid: b0f44113fd0fecb49977d4a7c5effed7,
+        type: 3}
       propertyPath: pauseFirstGameObject
       value: 
       objectReference: {fileID: 4947168782092420573}
