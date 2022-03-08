@@ -37,6 +37,8 @@ public class PlayerController : MonoBehaviour
     public Vector2 knockbackPower;
     public GameObject[] playerPieces;
 
+    //End level
+    public bool isStopped = false;
     #endregion
 
     #region Awake
@@ -53,19 +55,25 @@ public class PlayerController : MonoBehaviour
     }
 
     void Update()
-    {
-        if (!isKnockedBack)
+    {   if (isStopped)
         {
-            CheckPlayerRun();
-            CheckPlayerJump();
-            PlayerMovementHandler();
-            CheckCameraMovement();
-        } else
-        {
-            KnockbackPlayer();
-            PlayerMovementHandler();
+            StopPlayer();
         }
-        CheckPlayerAnimation();
+        else
+        {
+            if (!isKnockedBack)
+            {
+                CheckPlayerRun();
+                CheckPlayerJump();
+                PlayerMovementHandler();
+                CheckCameraMovement();
+            } else
+            {
+                KnockbackPlayer();
+                PlayerMovementHandler();
+            }
+            CheckPlayerAnimation();
+        }
     }
     #endregion
 
@@ -125,6 +133,13 @@ public class PlayerController : MonoBehaviour
         moveDirection.y = yStore;
 
         if (knockbackCounter <= 0) isKnockedBack = false;
+    }
+
+    private void StopPlayer()
+    {
+        moveDirection = Vector3.zero;
+        charControl.Move(moveDirection);
+        playerAnimator.SetFloat("Speed", 0);
     }
 
     public void SetKnockback(bool canKnockBack)

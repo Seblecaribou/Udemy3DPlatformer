@@ -30,6 +30,7 @@ public class LevelExit : MonoBehaviour
         if (other.tag == "Player")
         {
             starAnimator.SetTrigger("ReachEnd");
+            StartCoroutine(GameManager.instance.EndLevelCoroutine());
         }
     }
     #endregion

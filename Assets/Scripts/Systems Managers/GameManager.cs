@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -12,9 +13,13 @@ public class GameManager : MonoBehaviour
     private Vector3 respawnPosition;
     public float respawnDelay = 3f;
 
+    //EndLevel
+    public int victoryMusicIndex;
+    public string nextLevel;
+
     //Coins
     public int currentCoinsTotal = 0;
-    public int hurtSound = 8;
+    public int hurtSoundIndex = 8;
 
     //Menus
     public GameObject pauseFirstGameObject, optionsFirstGameObject;
@@ -60,7 +65,6 @@ public class GameManager : MonoBehaviour
         {
             UIManager.instance.pausePanel.SetActive(true);
             Time.timeScale = 0f;
-            Debug.Log("I'm Here!");
             EventSystem.current.SetSelectedGameObject(null);
             EventSystem.current.SetSelectedGameObject(pauseFirstGameObject);
             CursorHandler(true, CursorLockMode.None);
@@ -96,7 +100,7 @@ public class GameManager : MonoBehaviour
         HealthManager.instance.SetHealthToZero();
         PlayerController.instance.gameObject.SetActive(false);
         CameraController.instance.cinemachineBrain.enabled = false;
-        AudioManager.instance.PlaySFX(false, hurtSound);
+        AudioManager.instance.PlaySFX(false, hurtSoundIndex);
         UIManager.instance.fadeToBlack = true;
         PlayerController.instance.PlayerExplosionAnimation();
 
@@ -111,6 +115,15 @@ public class GameManager : MonoBehaviour
         PlayerController.instance.gameObject.transform.position = respawnPosition;
         PlayerController.instance.gameObject.SetActive(true);
         CameraController.instance.cinemachineBrain.enabled = true;
+    }
+    
+    
+    public IEnumerator EndLevelCoroutine()
+    {
+        PlayerController.instance.isStopped = true;
+        AudioManager.instance.PlayMusic(false, victoryMusicIndex);
+        yield return new WaitForSeconds(4f);
+        SceneManager.LoadScene(nextLevel);
     }
     #endregion
 }
