@@ -46,6 +46,7 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         instance = this;
+        playerAnimator.SetBool("IsInMainMenu", GameManager.instance.MainMenuChecker());
     }
 
     

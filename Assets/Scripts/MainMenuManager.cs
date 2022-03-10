@@ -7,6 +7,8 @@ public class MainMenuManager : MonoBehaviour
 {
     #region Variables
     public string firstLevel, levelSelect;
+
+    public GameObject continueButton;
     #endregion
 
     #region Awake
@@ -16,7 +18,7 @@ public class MainMenuManager : MonoBehaviour
     #region Start and Update
     void Start()
     {
-        
+        if (PlayerPrefs.HasKey("Continue")) continueButton.SetActive(true);
     }
 
     void Update()
@@ -28,13 +30,13 @@ public class MainMenuManager : MonoBehaviour
     #region Methods
     public void NewGame()
     {
+        PlayerPrefs.SetInt("Continue", 0);
         GameManager.instance.MainMenuChecker();
         SceneManager.LoadScene(firstLevel);
     }
 
     public void ContinueGame()
     {
-        GameManager.instance.MainMenuChecker();
         SceneManager.LoadScene(levelSelect);
     }
 

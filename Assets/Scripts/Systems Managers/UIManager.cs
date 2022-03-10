@@ -125,20 +125,20 @@ public class UIManager : MonoBehaviour
 
     public void LevelSelectMenu()
     {
+        Time.timeScale = 1;
 
     }
 
     public void OpenOptionMenu()
     {
-        soundSettingsPanel.SetActive(true);
+        soundSettingsPanel?.SetActive(true);
         EventSystem.current.SetSelectedGameObject(null);
         EventSystem.current.SetSelectedGameObject(GameManager.instance.optionsFirstGameObject);
-
     }
 
     public void CloseOptionsMenu()
     {
-        soundSettingsPanel.SetActive(false);
+        soundSettingsPanel?.SetActive(false);
         EventSystem.current.SetSelectedGameObject(null);
         EventSystem.current.SetSelectedGameObject(GameManager.instance.pauseFirstGameObject);
     }
@@ -160,6 +160,7 @@ public class UIManager : MonoBehaviour
 
     public void MainMenu()
     {
+        Time.timeScale = 1;
         SceneManager.LoadScene("MainMenu");
     }
     #endregion
