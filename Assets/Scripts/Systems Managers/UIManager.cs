@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
@@ -159,7 +160,7 @@ public class UIManager : MonoBehaviour
 
     public void MainMenu()
     {
-
+        SceneManager.LoadScene("MainMenu");
     }
     #endregion
 }

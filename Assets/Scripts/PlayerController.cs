@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -46,16 +47,18 @@ public class PlayerController : MonoBehaviour
     {
         instance = this;
     }
+
+    
     #endregion
 
     #region Start and Update
     void Start()
     {
-
     }
 
     void Update()
-    {   if (isStopped)
+    {    
+        if (isStopped)
         {
             StopPlayer();
         }
@@ -65,12 +68,12 @@ public class PlayerController : MonoBehaviour
             {
                 CheckPlayerRun();
                 CheckPlayerJump();
-                PlayerMovementHandler();
+                PlayerMovementHandler(false);
                 CheckCameraMovement();
             } else
             {
                 KnockbackPlayer();
-                PlayerMovementHandler();
+                PlayerMovementHandler(false);
             }
             CheckPlayerAnimation();
         }
@@ -114,12 +117,14 @@ public class PlayerController : MonoBehaviour
 
     private void CheckPlayerAnimation()
     {
+        if (GameManager.instance.MainMenuChecker()) playerAnimator.SetBool("IsInMainMenu", true);
         playerAnimator.SetFloat("Speed", Mathf.Abs(moveDirection.x) + Mathf.Abs(moveDirection.z));
         playerAnimator.SetBool("Grounded", charControl.isGrounded);
     }
 
-    private void PlayerMovementHandler()
+    private void PlayerMovementHandler(bool IsStopped)
     {
+        if (IsStopped) return;
         moveDirection.y += Physics.gravity.y * Time.deltaTime * gravityScale;
         charControl.Move(moveDirection * Time.deltaTime);
     }

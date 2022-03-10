@@ -12,7 +12,7 @@ public class AudioManager : MonoBehaviour
     public AudioSource[] allSFX;
     public AudioMixerGroup musicMixer, sfxMixer, masterMixer;
 
-    public int levelMusic = 0;
+    public int levelMusic;
     #endregion
 
     #region Awake

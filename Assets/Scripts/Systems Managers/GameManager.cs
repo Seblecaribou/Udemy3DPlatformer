@@ -41,11 +41,18 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetButtonDown("Cancel")) PauseUnpause();
+        if (Input.GetButtonDown("Cancel") && !MainMenuChecker()) PauseUnpause();
     }
     #endregion
 
     #region Methods
+    public bool MainMenuChecker()
+    {
+        string levelName = SceneManager.GetActiveScene().name;
+        if (levelName == "MainMenu") return true;
+        return false;
+    }
+
     private void CursorHandler(bool cursorVisible, CursorLockMode lockMode)
     {
         Cursor.visible = cursorVisible;
@@ -74,11 +81,6 @@ public class GameManager : MonoBehaviour
     public void SetSpawnPoint(Vector3 newSpawnPoint)
     {
         respawnPosition = newSpawnPoint;
-    }
-
-    public void SetTimeOut(float delay)
-    {
-
     }
 
     public void AddCoin(int coinsToAdd)
@@ -116,7 +118,6 @@ public class GameManager : MonoBehaviour
         PlayerController.instance.gameObject.SetActive(true);
         CameraController.instance.cinemachineBrain.enabled = true;
     }
-    
     
     public IEnumerator EndLevelCoroutine()
     {
