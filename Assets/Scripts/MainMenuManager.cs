@@ -42,6 +42,7 @@ public class MainMenuManager : MonoBehaviour
 
     public void QuitToDesktop()
     {
+        UnityEditor.EditorApplication.isPlaying = false;
         Application.Quit();
     }
     #endregion
