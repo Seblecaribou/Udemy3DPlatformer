@@ -11,18 +11,21 @@ public class PlayerController : MonoBehaviour
     //Health
     public int maxHealth = 5;
 
-    //Movement related vairable
+    //Movement related variables
     public float moveSpeed = 5f;
+    private float magnitude;
     public float jumpForce = 10f;
-    public float gravityScale = 5f;
+    private float ySpeed;
     public float bounceForce = 8f;
 
     //Character controls
-    private Vector3 moveDirection;
-    private float fallJumpCounter;
-    public float fallDelay = 1f;
     public CharacterController charControl;
-    
+    private Vector3 moveDirection;
+    private float stepOffset;
+    public float jumpBufferDelay = 0.2f;
+    private float? lastGroundedTime;
+    private float? lastJumpInputTime;
+
     //Camera
     public Camera playerCamera;
     public float rotateSpeed;
@@ -57,6 +60,7 @@ public class PlayerController : MonoBehaviour
     #region Start and Update
     void Start()
     {
+        stepOffset = charControl.stepOffset;
     }
 
     void Update()
@@ -70,6 +74,7 @@ public class PlayerController : MonoBehaviour
             if (!isKnockedBack)
             {
                 CheckPlayerRun();
+                JumBufferHandler();
                 CheckPlayerJump();
                 PlayerMovementHandler(false);
                 CheckCameraMovement();
@@ -88,25 +93,42 @@ public class PlayerController : MonoBehaviour
     {
         float yStored = moveDirection.y;
         moveDirection = transform.forward * Input.GetAxisRaw("Vertical") + transform.right * Input.GetAxisRaw("Horizontal");
+        magnitude = Mathf.Clamp01(moveDirection.magnitude) * moveSpeed;
         moveDirection.Normalize();
-        moveDirection *= moveSpeed;
         moveDirection.y = yStored;
     }
 
     private void CheckPlayerJump()
     {
-        if (charControl.isGrounded || (!charControl.isGrounded && charControl.velocity.y < 0 && fallJumpCounter > 0))
+        ySpeed += Physics.gravity.y * Time.deltaTime;
+        if (Time.time - lastGroundedTime <= jumpBufferDelay)
         {
-            fallJumpCounter = fallDelay;
-            if (Input.GetButtonDown("Jump"))
+            charControl.stepOffset = stepOffset;
+            ySpeed = -0.5f;
+            if (Time.time - lastJumpInputTime <= jumpBufferDelay)
             {
-                moveDirection.y = jumpForce;
-                fallJumpCounter = 0;
+                ySpeed = jumpForce;
+                lastGroundedTime = null;
+                lastJumpInputTime = null;
             }
-        } else if (!charControl.isGrounded)
+        } else
         {
-            fallJumpCounter -= Time.deltaTime;
+            charControl.stepOffset = 0.1f;
         }
+    }
+
+    private void JumBufferHandler()
+    {
+        if (charControl.isGrounded) lastGroundedTime = Time.time;
+        if (Input.GetButtonDown("Jump")) lastJumpInputTime = Time.time;
+    }
+
+    private void PlayerMovementHandler(bool IsStopped)
+    {
+        if (IsStopped) return;
+        Vector3 velocity = moveDirection * magnitude;
+        velocity.y = ySpeed;
+        charControl.Move(velocity * Time.deltaTime);
     }
 
     private void CheckCameraMovement()
@@ -129,13 +151,6 @@ public class PlayerController : MonoBehaviour
         if (GameManager.instance.MainMenuChecker()) playerAnimator.SetBool("IsInMainMenu", true);
         playerAnimator.SetFloat("Speed", Mathf.Abs(moveDirection.x) + Mathf.Abs(moveDirection.z));
         playerAnimator.SetBool("Grounded", charControl.isGrounded);
-    }
-
-    private void PlayerMovementHandler(bool IsStopped)
-    {
-        if (IsStopped) return;
-        moveDirection.y += Physics.gravity.y * Time.deltaTime * gravityScale;
-        charControl.Move(moveDirection * Time.deltaTime);
     }
     
     private void KnockbackPlayer()
