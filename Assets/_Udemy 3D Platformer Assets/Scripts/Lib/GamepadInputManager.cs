@@ -15,7 +15,6 @@ public class GamepadInputManager : MonoBehaviour
     }
     #endregion
 
-
     #region Start and Update
     void Start()
     {

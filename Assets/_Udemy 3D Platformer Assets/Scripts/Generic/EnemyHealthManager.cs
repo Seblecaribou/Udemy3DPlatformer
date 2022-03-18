@@ -40,6 +40,7 @@ public class EnemyHealthManager : MonoBehaviour
         {
             skeletonAnimator.SetTrigger("Death");
             AudioManager.instance.PlaySFX(true, deathSound);
+            gameObject.SetActive(false);
             Destroy(gameObject, 0.5f);
             DropLoot(lootToDrop, numberOfLootToDrop);
             GameObject explosion = Instantiate(enemyExplosion, transform.position + new Vector3(0, 1f, 0), transform.rotation);

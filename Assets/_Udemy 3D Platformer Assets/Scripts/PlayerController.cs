@@ -19,9 +19,9 @@ public class PlayerController : MonoBehaviour
     private float jumpHeight = 10f;
     [SerializeField]
     private float gravityMultiplier;
-    private float ySpeed;
+    public float ySpeed;
     [SerializeField]
-    private float bounceForce = 8f;
+    private float bounceHeight = 8f;
 
     //Character controls
     [SerializeField]
@@ -189,8 +189,9 @@ public class PlayerController : MonoBehaviour
     
     public void BouncePlayer(float bounceMultiplier)
     {
-        moveDirection.y = bounceForce * bounceMultiplier;
-        charControl.Move(moveDirection * Time.deltaTime);
+        float gravity = Physics.gravity.y * bounceMultiplier;
+        ySpeed = Mathf.Sqrt(bounceHeight * -3 * gravity);
+        //charControl.Move(moveDirection * Time.deltaTime);
     }
 
     public void PlayerFlicker(float countdown, float flickeringIntensity)
