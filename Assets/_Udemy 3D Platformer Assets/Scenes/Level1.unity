@@ -21363,12 +21363,12 @@ PrefabInstance:
     - target: {fileID: 184935756435988496, guid: 2f6af0e7e91e820489a236a202a61c38,
         type: 3}
       propertyPath: m_SlopeLimit
-      value: 50
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 184935756435988496, guid: 2f6af0e7e91e820489a236a202a61c38,
         type: 3}
       propertyPath: m_StepOffset
-      value: 0.3
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 184935756435988497, guid: 2f6af0e7e91e820489a236a202a61c38,
         type: 3}
@@ -21382,8 +21382,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 184935756435988497, guid: 2f6af0e7e91e820489a236a202a61c38,
         type: 3}
+      propertyPath: jumpHeight
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 184935756435988497, guid: 2f6af0e7e91e820489a236a202a61c38,
+        type: 3}
       propertyPath: jumpBufferDelay
       value: 0.18
+      objectReference: {fileID: 0}
+    - target: {fileID: 184935756435988497, guid: 2f6af0e7e91e820489a236a202a61c38,
+        type: 3}
+      propertyPath: gravityMultiplier
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 184935756435988502, guid: 2f6af0e7e91e820489a236a202a61c38,
         type: 3}

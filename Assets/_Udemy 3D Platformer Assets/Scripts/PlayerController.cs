@@ -12,17 +12,24 @@ public class PlayerController : MonoBehaviour
     public int maxHealth = 5;
 
     //Movement related variables
-    public float moveSpeed = 5f;
+    [SerializeField]
+    private float moveSpeed = 5f;
     private float magnitude;
-    public float jumpForce = 10f;
+    [SerializeField]
+    private float jumpHeight = 10f;
+    [SerializeField]
+    private float gravityMultiplier;
     private float ySpeed;
-    public float bounceForce = 8f;
+    [SerializeField]
+    private float bounceForce = 8f;
 
     //Character controls
-    public CharacterController charControl;
+    [SerializeField]
+    private CharacterController charControl;
     private Vector3 moveDirection;
     private float stepOffset;
-    public float jumpBufferDelay = 0.2f;
+    [SerializeField]
+    private float jumpBufferDelay = 0.2f;
     private float? lastGroundedTime;
     private float? lastJumpInputTime;
 
@@ -100,14 +107,16 @@ public class PlayerController : MonoBehaviour
 
     private void CheckPlayerJump()
     {
-        ySpeed += Physics.gravity.y * Time.deltaTime;
+        float gravity = Physics.gravity.y * gravityMultiplier;
+        if (!charControl.isGrounded && ySpeed > 0 && !Input.GetButton("Jump")) gravity *= 2;
+        ySpeed += gravity * Time.deltaTime;
         if (Time.time - lastGroundedTime <= jumpBufferDelay)
         {
             charControl.stepOffset = stepOffset;
             ySpeed = -0.5f;
             if (Time.time - lastJumpInputTime <= jumpBufferDelay)
             {
-                ySpeed = jumpForce;
+                ySpeed = Mathf.Sqrt(jumpHeight * -3 * gravity);
                 lastGroundedTime = null;
                 lastJumpInputTime = null;
             }
