@@ -137,7 +137,8 @@ public class EnemyController : MonoBehaviour
     /// </summary>
     /// <param name="newDestination"></param>
     private void SetEnemyTarget(Vector3 newDestination)
-    {     
+    {
+        if (newDestination == null) return;
         agent.SetDestination(newDestination);
     }
 
