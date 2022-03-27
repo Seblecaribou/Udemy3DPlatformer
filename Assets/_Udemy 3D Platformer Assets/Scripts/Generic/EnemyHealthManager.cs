@@ -38,7 +38,7 @@ public class EnemyHealthManager : MonoBehaviour
         currentHealth--;
         if (currentHealth <= 0)
         {
-            skeletonAnimator.SetTrigger("Death");
+            if (skeletonAnimator != null) skeletonAnimator.SetTrigger("Death");
             AudioManager.instance.PlaySFX(true, deathSound);
             gameObject.SetActive(false);
             Destroy(gameObject, 0.5f);

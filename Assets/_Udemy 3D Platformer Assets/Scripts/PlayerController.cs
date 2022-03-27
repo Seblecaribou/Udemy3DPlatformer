@@ -131,7 +131,7 @@ public class PlayerController : MonoBehaviour
         if (charControl.isGrounded) lastGroundedTime = Time.time;
         if (Input.GetButtonDown("Jump")) lastJumpInputTime = Time.time;
     }
-
+ 
     private void PlayerMovementHandler(bool IsStopped)
     {
         if (IsStopped) return;
@@ -167,7 +167,7 @@ public class PlayerController : MonoBehaviour
         knockbackCounter -= Time.deltaTime;
 
         float yStore = moveDirection.y;
-        moveDirection = playerModel.transform.forward * -knockbackPower.x;
+        moveDirection = transform.forward * -knockbackPower.x;
         moveDirection.y = yStore;
 
         if (knockbackCounter <= 0) isKnockedBack = false;

@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_Udemy 3D Platformer Assets/Scenes/Level1.unity
     guid: 968f0cfdccc113c47b304cc7a2066389
+  - enabled: 1
+    path: Assets/_Udemy 3D Platformer Assets/Scenes/Level2.unity
+    guid: 3ea7b34cd090fe847b977db54aaf21d1
   m_configObjects: {}

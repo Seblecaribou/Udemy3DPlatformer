@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Grass
+  m_Name: DarkGrass
   m_Shader: {fileID: 4800000, guid: 7cd5de0b884b14f88ab763ef465e1799, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -72,9 +72,9 @@ Material:
     - _Glossiness: 0
     - _GlossyReflections: 1
     - _Lumin: 0.15
-    - _MaxLight: 1
+    - _MaxLight: 0.85
     - _Metallic: 0
-    - _MinLight: 0.63
+    - _MinLight: 0.58
     - _Mode: 0
     - _OcclusionStrength: 1
     - _Offset: -0.27
@@ -92,7 +92,7 @@ Material:
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
-    - _Color: {r: 0.12904204, g: 0.4528302, b: 0.03631186, a: 1}
+    - _Color: {r: 0.0061259526, g: 0.23584908, b: 0, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _ShnColor: {r: 1, g: 1, b: 0, a: 1}
   m_BuildTextureStacks: []
